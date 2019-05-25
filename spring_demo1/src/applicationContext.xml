@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        <!-- -->
+      
+        <bean id="UserDAOImol" class = "com.spring.demo1.UserDAOImol"  >
+        	
+        	<!-- 通过set方法去设置属性-->
+        	<!--  <property name="name" value = "zht"></property>-->
+        	
+        	<!-- 通过构造方法去设置属性-->
+        	<!-- <constructor-arg value="ht"></constructor-arg> -->
+        	
+        	<!-- 通过p名称空间设置属性，需要set方法-->
+     		 <!-- <bean id="userDAO" class = "com.spring.demo1.UserDAOImol" p:name = "zzz" ></bean> -->
+        	
+        	<!-- 注入数组-->
+        	<!-- <property name="name">
+			<list>
+				<value>王东</value>
+				<value>赵洪</value>
+				<value>李冠希</value>
+			</list>
+			</property> --> 
+
+			<!-- 引入配置文件-->
+			   
+
+        </bean>
+         
+ </beans>
+        

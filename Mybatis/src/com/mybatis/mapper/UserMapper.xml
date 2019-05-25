@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 写Sql语句 -->
+<mapper namespace="com.mybatis.mapper.UserMapper">
+
+	<!--添加映射 parameterType -->
+	<resultMap id="userResultMap" type="User">
+		<result property="nane" column="姓名" />
+		<result property="sex" column="性别" />
+		<result property="StudentID" column="学号" />
+		<result property="js" column="js成绩" />
+		<result property="C" column="C#成绩" />
+		<result property="database" column="数据库成绩" />
+		<result property="Careerplanning" column="职业规划成绩" />
+		<result property="Mentalhealth" column="心理健康成绩" />
+		<result property="Sports" column="体育成绩" />
+	</resultMap>
+	<select id="findUserById" parameterType="String"
+		resultMap="userResultMap">
+		select * from class1710 where 学号 = #{id}
+	</select>
+
+	<select id="selectUserBySex" parameterType="String"
+		resultMap="userResultMap">
+		select * from class1710 where 性别 = #{sex}
+	</select>
+
+
+	<insert id="insertUser" parameterType="com.mybatis.pojo.User">
+		insert into
+		class1710(姓名,性别,学号,js成绩,C#成绩,数据库成绩,职业规划成绩,心理健康成绩,体育成绩) values
+		(#{nane},#{sex},#{StudentID},#{js},#{C},#{database},#{Careerplanning},#{Mentalhealth},#{Sports})
+
+	</insert>
+
+	<update id="updateUserByStudentID"
+		parameterType="com.mybatis.pojo.User">
+		update class1710
+		<set>
+			<if test="nane != null">姓名=#{nane},</if>
+			<if test="sex != null">性别=#{sex},</if>
+			<if test="StudentID != null">学号=#{StudentID},</if>
+			<if test="js != null">js成绩=#{js},</if>
+			<if test="C != null">C#成绩=#{C},</if>
+			<if test="database != null">数据库成绩=#{database},</if>
+			<if test="Careerplanning != null">职业规划成绩=#{Careerplanning},</if>
+			<if test="Mentalhealth != null">心理健康成绩=#{Mentalhealth},</if>
+			<if test="Sports != null">体育成绩=#{Sports}</if>
+		</set>
+		where 学号=#{StudentID}
+	</update>
+
+	<delete id="DeleteUserByStudentID" parameterType="String">
+		delete from class1710 where 学号 = #{StudentID}
+	</delete>
+	
+	<!-- SQL片段 -->
+	<sql id="selector">
+		select * from class1710
+	</sql>
+	<select id="selectStudentByStudentIDs" parameterType="String" resultMap="userResultMap">
+		<!-- 引用片段 -->
+	 	<include refid="selector"/>
+	 	
+	 	<where>
+	 		学号  in
+	 		<!-- collection="array" 而不是Array -->
+	 		<foreach collection="array" item="id" separator="," open="(" close=")">
+	 			#{id}
+	 		</foreach>
+	 	</where>
+	</select>
+
+</mapper>

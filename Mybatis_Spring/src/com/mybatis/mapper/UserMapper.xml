@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 写Sql语句 -->
+<mapper namespace="com.mybatis.mapper.UserMapper">
+
+	<!--添加映射 parameterType -->
+	<resultMap id="userResultMap" type="User">
+		<result property="nane" column="姓名" />
+		<result property="sex" column="性别" />
+		<result property="StudentID" column="学号" />
+		<result property="js" column="js成绩" />
+		<result property="C" column="C#成绩" />
+		<result property="database" column="数据库成绩" />
+		<result property="Careerplanning" column="职业规划成绩" />
+		<result property="Mentalhealth" column="心理健康成绩" />
+		<result property="Sports" column="体育成绩" />
+	</resultMap>
+	<select id="findUserById" parameterType="String"
+		resultMap="userResultMap">
+		select * from class1710 where 学号 = #{id}
+	</select>
+
+</mapper>

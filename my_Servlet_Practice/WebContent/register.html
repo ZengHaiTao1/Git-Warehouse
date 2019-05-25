@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<script type="text/javascript" src="JS/jquery-2.1.3.min.js" ></script>
+	<style>
+		body{
+			background: #CCCCCC;
+		}
+	</style>
+	<body>
+		<form id="form-1">
+			班级<input type="text" name="banji" class="banji">
+			姓名<input type="text" name="name" class="name"> 
+			账号<input type="text" name="ID" class="ID"> 
+			密码<input type="text" name="password" class="password">
+			<input type="button" value="Submit" id="button-1" />
+		</form>
+		<script type="text/javascript">
+			$("#button-1").click(function() {
+				$.ajax({
+					type:"POST",
+					url: "myservlet",
+					data: {
+						banjie:$(".banji").val(),
+						name:$(".name").val(),
+						id:$(".ID").val(),
+						password:$(".password").val(),
+						method :"register"
+					},
+					success: function(msg) {
+						if(msg){
+							alert("注册成功")
+							//window.location.href="login.html";
+						}else{
+						alert("注册失败")
+						console.log(msg)
+						}
+						
+					},
+					 error:function(err){
+					        console.log("失败");
+					    }
+
+				});
+		
+			})
+				function GetQueryString(name) {
+
+				var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+
+				var r = window.location.search.substr(1).match(reg);
+
+				if(r != null) return(r[2]);
+				return null;
+
+			}
+		</script>
+	</body>
+
+</html>

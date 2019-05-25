@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+	</head>
+	<script type="text/javascript" src="JS/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="JS/cookie.js"></script>
+
+	<body>
+		账号<input type="text" class="name" id="txtUserName"> 密码
+		<input type="text" class="password" id="txtUserPass">
+		<button class="delu">登录</button>
+		
+		<input type="checkbox" id="chkRememberPass" name="chkRememberPass" style="vertical-align:middle;" />
+
+		<a href="register.html?id=5">注册</a>
+		<script>
+			$(".delu").click(function() {
+				userLogin();
+				$.ajax({
+					type: "POST",
+					url: "myservlet",
+					data: {
+						id: $(".name").val(),
+						password: $(".password").val(),
+						method: "login"
+					},
+					success: function(msg) {
+						let mydata = JSON.parse(msg);
+						console.log(mydata)
+						window.location.href = "index.html";
+					},
+					error: function(err) {
+						console.log("失败");
+					}
+				});
+
+			})
+		</script>
+	</body>
+
+</html>

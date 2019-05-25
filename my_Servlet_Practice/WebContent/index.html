@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script type="text/javascript" src="JS/jquery-2.1.3.min.js"></script>
+
+	<body>
+		<p>欢迎您</p>
+		<p class="a"></p>
+		<script type="text/javascript">
+			$.ajax({
+				type: "GET",
+				url: "myservlet",
+				data: {
+					"method": "session"
+				},
+				success: function(msg) {
+					if(msg.trim() === "NO") {
+						window.location.href = "login.html";
+					} else {
+						let stu = JSON.parse(msg);
+						console.log(stu)
+						$(".a").text(stu[0]["学生"]);
+					}
+
+
+				},
+				error: function(err) {
+					console.log("失败");
+				}
+
+			});
+		</script>
+	</body>
+
+</html>

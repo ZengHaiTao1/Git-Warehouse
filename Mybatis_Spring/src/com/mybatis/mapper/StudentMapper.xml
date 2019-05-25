@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 写Sql语句 -->
+<mapper namespace="com.mybatis.mapper.StudentMapper">
+
+	<!-- 一对多映射，即查询返回一个Student对象，里面的user由多个 -->
+	<!-- 学生表的一条数据，对应用户表的多条数据 -->
+	<resultMap type="Student" id="stuUser">
+		<id property="id" column="id" />
+		<result property="stuName" column="学生" />
+		<collection property="users" javaType="list" ofType="User">
+			<result property="sex" column="性别" />
+			<result property="StudentID" column="学号" />
+			<result property="js" column="js成绩" />
+			<result property="C" column="C#成绩" />
+			<result property="database" column="数据库成绩" />
+			<result property="Careerplanning" column="职业规划成绩" />
+			<result property="Mentalhealth" column="心理健康成绩" />
+			<result property="Sports" column="体育成绩" />
+		</collection>
+	</resultMap>
+	<select id="selectStudentByStudentName" parameterType="String"
+		resultMap="stuUser">
+		SELECT
+		studen.学生,class1710.性别,class1710.学号,class1710.js成绩,class1710.C#成绩,class1710.数据库成绩,class1710.职业规划成绩,class1710.心理健康成绩,class1710.体育成绩
+		FROM studen
+		LEFT JOIN class1710
+		ON studen.学生=class1710.姓名
+		WHERE studen.学生
+		=
+		#{name}
+	</select>
+	
+	<!-- 一对一映射，即查询返回多个User对象，里面的只有一个student -->
+	<!--元素类型为 "resultMap" 的内容必须匹配 "(constructor?,id*,result*,association*,collection*,discriminator?)" -->
+	<!-- 用户表有多条数据，对应学生表的一个姓名 -->
+	<resultMap type="User" id="stuUser2">
+		<result property="StudentID" column="学号" />
+		<result property="sex" column="性别" />
+		<result property="js" column="js成绩" />
+		<result property="C" column="C#成绩" />
+		<result property="database" column="数据库成绩" />
+		<result property="Careerplanning" column="职业规划成绩" />
+		<result property="Mentalhealth" column="心理健康成绩" />
+		<result property="Sports" column="体育成绩" />
+		<collection property="student" javaType="Student">
+			<result property="stuName" column="学生" />
+		</collection>
+	</resultMap>
+	<select id="selectStudentByStudentName2" parameterType="String"
+		resultMap="stuUser2">
+		SELECT
+		class1710.性别,class1710.学号,class1710.js成绩,class1710.C#成绩,class1710.数据库成绩,class1710.职业规划成绩,class1710.心理健康成绩,class1710.体育成绩,studen.学生,studen.ID
+		FROM class1710
+		LEFT JOIN studen
+		ON studen.学生=class1710.姓名
+		WHERE
+		class1710.姓名
+		=
+		#{name}
+	</select>
+
+
+	
+</mapper>

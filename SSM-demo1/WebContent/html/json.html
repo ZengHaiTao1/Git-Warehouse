@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script type="text/javascript" src="/SSM-demo1/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var params = '{"id": 1,"studentno": 456,"subjectid": 999,"studentscores": 55555,"examdate": "2017-05-06"}';
+	$.ajax({
+		url : "../json.action",
+		data : params,
+		async: true,
+		contentType : "application/json;charset=UTF-8",//发送数据的格式
+		type : "post",
+		dataType : "json",//回调
+		success : function(data){
+			console.log(data);
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});
+});
+</script>
+<body>
+	<a>json交互</a>
+</body>
+</html>

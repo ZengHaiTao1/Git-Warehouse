@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+		<script type="text/javascript" src="/SSM-demo1/js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				
+				$("#sub").click(function(){
+					var parm = {
+							usname:$("#usname").val(),
+							password:$("#password").val()
+						}
+					$.ajax({
+						url: "../userlogin.action",
+						data: parm,
+						async: true,
+						//contentType: "application/json;charset=UTF-8", //发送数据的格式
+						type: "post",
+						dataType: "json", //回调
+						success: function(data) {
+							console.log(data.a);
+							if(data.a.trim()=="true"){
+								window.location = "/SSM-demo1/html/loginCG/index.html"
+							}
+						},
+						error: function(e) {
+							console.log(e);
+						}
+					});
+					console.log(parm);
+					console.log($("#frm-reg").serialize());
+				})
+			})
+		</script>
+	</head>
+
+	<body>
+		<div align="center">
+			<br>
+			<br>
+			<br>
+			<!-- 作业：post方法与get方法的区别 -->
+			<form action="../userlogin.action" id="frm-reg" method="post" enctype=”multipart/form-data”>
+				<p>用户登录</p>
+				账号：<input name="usname" id="usname" type="text" /> <br>
+				<br> 密码：<input name="password" id="password" type="password" /> <br>
+				<br> <input type="reset" value="撤 销" />
+				<input type="button" id="sub"  value="提 交"  />
+			</form>
+		</div>
+	</body>
+
+</html>

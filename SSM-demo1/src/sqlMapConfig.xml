@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 设置别名 -->
+	<!-- <typeAliases> 2. 指定扫描包，会把包内所有的类都设置别名，别名的名称就是类名，大小写不敏感 <package name="com.itcast.ssm.po" 
+		/> </typeAliases> -->
+
+	<!-- Mapper的位置 Mapper.xml 写Sql语句的文件的位置 -->
+	<environments default="development">
+		<environment id="development">
+			<!-- 使用jdbc事务管理 -->
+			<transactionManager type="JDBC" />
+			<!-- 数据库连接池 -->
+			<dataSource type="POOLED">
+				<property name="driver"
+					value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+				<property name="url"
+					value="jdbc:sqlserver://localhost:1433;DatabaseName=TextSchool" />
+				<property name="username" value="sa" />
+				<property name="password" value="123456789" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<package name="com.itcast.mapper.dao" />
+	</mappers>
+	<!-- spring配置里面扫描过了 -->
+
+</configuration>

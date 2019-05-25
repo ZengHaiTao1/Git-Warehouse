@@ -1,3 +1,2 @@
-Git ²âÊÔÎÄ±¾
-
-ĞŞ¸Ä²âËÆ
+Git is a distributed version control system.
+Git is free software distributed under the GPL.
